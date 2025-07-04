@@ -1,8 +1,13 @@
 @import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #fff;
+  --foreground: #111;
+  --accent: #2563eb; /* soft blue */
+  --accent-gold: #e6c674;
 }
 
 @theme inline {
@@ -19,8 +24,54 @@
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+html, body {
+  @apply bg-white text-gray-900 font-sans antialiased;
+}
+
+* {
+  @apply box-border;
+}
+
+/* Premium Typography Utilities */
+.hero-title {
+  @apply text-5xl md:text-7xl font-extrabold tracking-tight leading-tight text-gray-900;
+  letter-spacing: -0.03em;
+}
+.hero-caption {
+  @apply text-base md:text-lg font-light tracking-wider text-blue-600 uppercase mb-2;
+  letter-spacing: 0.08em;
+}
+.section-title {
+  @apply text-3xl md:text-4xl font-bold tracking-tight text-gray-900 mb-8;
+}
+.section-caption {
+  @apply text-sm font-light tracking-wider text-gray-400 uppercase mb-4;
+}
+.card-title {
+  @apply text-lg font-semibold text-gray-900;
+}
+.card-caption {
+  @apply text-xs text-gray-500;
+}
+.gold-accent {
+  @apply text-[var(--accent-gold)] font-semibold;
+}
+.divider {
+  @apply w-full border-b border-gray-100 my-12;
+}
+
+/* Soft transitions for all */
+.transition-all {
+  transition: all 0.2s cubic-bezier(0.4,0,0.2,1);
+}
+
+/* Focus/hover states for accessibility */
+:focus {
+  outline: 2px solid #2563eb;
+  outline-offset: 2px;
+}
+
+/* Extra whitespace for sections */
+.section {
+  @apply py-16 md:py-24;
 }
