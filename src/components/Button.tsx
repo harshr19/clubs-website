@@ -17,11 +17,11 @@ export default function Button({
   ...props
 }: ButtonProps) {
   const base =
-    "font-semibold rounded-full transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-200 inline-flex items-center justify-center";
+    "font-bold rounded-lg transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-blue-700 inline-flex items-center justify-center shadow-sm";
   const filled =
-    "bg-gray-900 text-white shadow hover:bg-gray-800 hover:scale-[1.04]";
+    "bg-blue-700 text-white hover:bg-blue-900";
   const outlined =
-    "border border-gray-900 text-gray-900 bg-white hover:bg-gray-100 hover:scale-[1.04]";
+    "border border-blue-700 text-blue-700 bg-white hover:bg-blue-50";
   const sizes = {
     sm: "px-4 py-1 text-sm",
     md: "px-6 py-2 text-base",
@@ -29,8 +29,8 @@ export default function Button({
   };
   return (
     <motion.button
-      whileHover={{ scale: 1.04 }}
-      whileTap={{ scale: 0.98 }}
+      whileHover={{ scale: 1.01 }}
+      whileTap={{ scale: 0.99 }}
       className={[
         base,
         variant === "filled" ? filled : outlined,

@@ -7,6 +7,7 @@ import Badge from "../../../components/Badge";
 import Button from "../../../components/Button";
 import { motion } from "framer-motion";
 import clubs from "../../../data/clubs";
+import Link from "next/link";
 
 export default function ClubDetailPage() {
   const { id } = useParams();
@@ -36,8 +37,16 @@ export default function ClubDetailPage() {
             ))}
           </div>
           <div className="flex gap-3 mt-2">
-            {club.socialLinks.instagram && <a href={club.socialLinks.instagram} target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline">Instagram</a>}
-            {club.socialLinks.linkedin && <a href={club.socialLinks.linkedin} target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline">LinkedIn</a>}
+            {club.socialLinks.instagram && (
+              <a href={club.socialLinks.instagram} target="_blank" rel="noopener noreferrer" className="text-pink-500 hover:text-pink-600 transition-colors" aria-label="Instagram">
+                <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M7.75 2h8.5A5.75 5.75 0 0 1 22 7.75v8.5A5.75 5.75 0 0 1 16.25 22h-8.5A5.75 5.75 0 0 1 2 16.25v-8.5A5.75 5.75 0 0 1 7.75 2zm0 1.5A4.25 4.25 0 0 0 3.5 7.75v8.5A4.25 4.25 0 0 0 7.75 20.5h8.5A4.25 4.25 0 0 0 20.5 16.25v-8.5A4.25 4.25 0 0 0 16.25 3.5zm4.25 2.75a5.75 5.75 0 1 1 0 11.5a5.75 5.75 0 0 1 0-11.5zm0 1.5a4.25 4.25 0 1 0 0 8.5a4.25 4.25 0 0 0 0-8.5zm5.25 1.25a1 1 0 1 1 0 2a1 1 0 0 1 0-2z"/></svg>
+              </a>
+            )}
+            {club.socialLinks.linkedin && (
+              <a href={club.socialLinks.linkedin} target="_blank" rel="noopener noreferrer" className="text-blue-700 hover:text-blue-800 transition-colors" aria-label="LinkedIn">
+                <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.76 0-5 2.24-5 5v14c0 2.76 2.24 5 5 5h14c2.76 0 5-2.24 5-5v-14c0-2.76-2.24-5-5-5zm-11 19h-3v-10h3v10zm-1.5-11.27c-.97 0-1.75-.79-1.76-1.76c0-.97.78-1.76 1.75-1.76s1.75.79 1.75 1.76c0 .97-.78 1.76-1.75 1.76zm13.5 11.27h-3v-5.6c0-1.34-.03-3.07-1.87-3.07c-1.87 0-2.16 1.46-2.16 2.97v5.7h-3v-10h2.89v1.36h.04c.4-.75 1.37-1.54 2.82-1.54c3.01 0 3.57 1.98 3.57 4.56v5.62z"/></svg>
+              </a>
+            )}
             {club.socialLinks.website && <a href={club.socialLinks.website} target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline">Website</a>}
           </div>
         </div>
@@ -78,7 +87,9 @@ export default function ClubDetailPage() {
                 <span className="font-bold">{pos.title}</span>
                 <span className="text-gray-500 text-sm">{pos.requirements}</span>
                 <span className="text-xs text-gray-400">Apply by {pos.deadline}</span>
-                <Button size="md" variant="filled" className="mt-2">Apply</Button>
+                <Link href={`/clubs/${id}/apply`}>
+                  <Button size="md" variant="filled" className="mt-2">Apply</Button>
+                </Link>
               </Card>
             ))}
           </div>

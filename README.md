@@ -1,4 +1,4 @@
-# College Club Management Website (Frontend Only)
+# Campus Connect Website (Frontend Only)
 
 A modern, responsive frontend for managing and exploring college clubs. Built with **Next.js** and **TailwindCSS**.
 

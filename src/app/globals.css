@@ -6,22 +6,8 @@
 :root {
   --background: #fff;
   --foreground: #111;
-  --accent: #2563eb; /* soft blue */
+  --accent: #2563eb;
   --accent-gold: #e6c674;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
 }
 
 html, body {
