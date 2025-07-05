@@ -1,4 +1,3 @@
-"use client";
 import { motion } from "framer-motion";
 import Button from "../components/Button";
 import { Typewriter } from 'react-simple-typewriter';
@@ -37,4 +36,4 @@ export default function Home() {
       <div className="w-full max-w-2xl mx-auto border-b border-gray-100 mt-8 z-10" />
     </main>
   );
-}
+} 

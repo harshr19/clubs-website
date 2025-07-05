@@ -1,8 +1,7 @@
-"use client";
-import { useState } from "react";
-import Card from "../../../components/Card";
-import Button from "../../../components/Button";
-import { motion } from "framer-motion";
+import { useState } from 'react';
+import Card from '../components/Card';
+import Button from '../components/Button';
+import { motion } from 'framer-motion';
 
 const club = {
   name: "Robotics Club",
@@ -26,11 +25,11 @@ const registeredStudents = [
 export default function AdminDashboard() {
   const [events, setEvents] = useState(initialEvents);
   const [showModal, setShowModal] = useState(false);
-  const [editEvent, setEditEvent] = useState<any>(null);
+  const [editEvent, setEditEvent] = useState(null);
   const [title, setTitle] = useState("");
   const [date, setDate] = useState("");
 
-  const openModal = (event?: any) => {
+  const openModal = (event) => {
     setEditEvent(event || null);
     setTitle(event?.title || "");
     setDate(event?.date || "");
@@ -50,7 +49,7 @@ export default function AdminDashboard() {
     }
     closeModal();
   };
-  const deleteEvent = (id: number) => {
+  const deleteEvent = (id) => {
     setEvents(events.filter(e => e.id !== id));
   };
 

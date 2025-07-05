@@ -1,8 +1,7 @@
-"use client";
-import { useState } from "react";
-import Card from "../../../components/Card";
-import Button from "../../../components/Button";
-import { motion } from "framer-motion";
+import { useState } from 'react';
+import Card from '../components/Card';
+import Button from '../components/Button';
+import { motion } from 'framer-motion';
 
 const clubs = [
   { id: 1, name: "Robotics Club", description: "Build and program robots.", joined: false },
@@ -16,7 +15,7 @@ const events = [
   { id: 3, title: "Code Sprint", club: "Coding Club", date: "2024-07-20", registered: false },
 ];
 
-export default function StudentDashboard() {
+export default function Dashboard() {
   const [clubList, setClubList] = useState(clubs);
   const [eventList, setEventList] = useState(events);
 

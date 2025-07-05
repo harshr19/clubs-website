@@ -1,8 +1,6 @@
-"use client";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { Link, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
-import Button from "@/components/Button";
+import Button from "./Button";
 import { motion } from "framer-motion";
 
 const navLinks = [
@@ -14,7 +12,8 @@ const navLinks = [
 export default function Navbar() {
   // Dummy user state (replace with context/auth later)
   const [user, setUser] = useState<{ loggedIn: boolean; role: "student" | "admin" | null }>({ loggedIn: false, role: null });
-  const pathname = usePathname();
+  const location = useLocation();
+  const pathname = location.pathname;
   const [search, setSearch] = useState("");
 
   // Remove theme state, useEffect, and theme toggle button
@@ -27,7 +26,7 @@ export default function Navbar() {
       className="w-full bg-white/90 backdrop-blur shadow-sm rounded-b-2xl px-6 py-3 flex items-center justify-between sticky top-0 z-30 border-b border-gray-100"
     >
       {/* Logo + Icon */}
-      <Link href="/" className="flex items-center gap-2 font-extrabold text-xl tracking-tight text-gray-900 mr-8 focus:outline-none focus:ring-2 focus:ring-blue-200">
+      <Link to="/" className="flex items-center gap-2 font-extrabold text-xl tracking-tight text-gray-900 mr-8 focus:outline-none focus:ring-2 focus:ring-blue-200">
         <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="14" cy="14" r="13" stroke="#2563eb" strokeWidth="2"/><circle cx="14" cy="14" r="6" fill="#2563eb"/></svg>
         Campus Connect
       </Link>
@@ -40,7 +39,7 @@ export default function Navbar() {
           return (
             <Link
               key={link.href}
-              href={link.href}
+              to={link.href}
               className={`relative text-base font-medium px-2 py-1 rounded transition-colors focus:outline-none focus:ring-2 focus:ring-blue-200 ${isActive ? "text-gray-900" : "text-gray-500 hover:text-gray-900"}`}
             >
               {link.label}
@@ -66,7 +65,7 @@ export default function Navbar() {
             <svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/></svg>
           </span>
         </div>
-        <Link href={user.loggedIn ? "/you" : "/login"} className="ml-2 flex items-center justify-center w-10 h-10 rounded-full bg-gray-100 hover:bg-blue-100 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-200">
+        <Link to={user.loggedIn ? "/you" : "/login"} className="ml-2 flex items-center justify-center w-10 h-10 rounded-full bg-gray-100 hover:bg-blue-100 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-200">
           <svg width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
             <circle cx="12" cy="8" r="4" />
             <path d="M4 20c0-2.21 3.58-4 8-4s8 1.79 8 4" />

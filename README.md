@@ -1,70 +1,86 @@
-# Campus Connect Website (Frontend Only)
+# Clubs Website
 
-A modern, responsive frontend for managing and exploring college clubs. Built with **Next.js** and **TailwindCSS**.
+A React-based web application for managing college clubs and events.
 
----
+## Tech Stack
 
-## ✨ Features
-- Home, Login/Signup, Student/Admin Dashboards
-- Club detail pages, event registration, and admin event management
-- Role-based UI (Student vs Club Admin)
-- Responsive, stylish, and accessible design
-- Uses mock data (no backend required)
+- **React 19** - Frontend framework
+- **TypeScript** - Type safety
+- **Vite** - Build tool and development server
+- **React Router** - Client-side routing
+- **Tailwind CSS** - Styling
+- **Framer Motion** - Animations
+- **React Simple Typewriter** - Typewriter effect
 
----
+## Getting Started
 
-## 🧱 Tech Stack
-- **Framework:** Next.js (App Router)
-- **Styling:** TailwindCSS
-- **Icons:** Heroicons
-- **Fonts:** Inter (default)
+### Prerequisites
 
----
+- Node.js (version 18 or higher)
+- npm or yarn
 
-## 📁 Folder Structure (Planned)
-```
-/ (root)
-├── src/
-│   ├── app/                # Next.js app directory (pages, layouts)
-│   ├── components/         # Reusable UI components
-│   ├── data/               # Dummy/mock data (clubs, events, users)
-│   ├── hooks/              # Custom React hooks
-│   └── styles/             # Tailwind and global CSS
-├── public/                 # Static assets (images, club logos, etc)
-└── ...
+### Installation
+
+1. Clone the repository:
+```bash
+git clone <repository-url>
+cd clubs-website
 ```
 
----
+2. Install dependencies:
+```bash
+npm install
+```
 
-## 🚀 Getting Started
+3. Start the development server:
+```bash
+npm run dev
+```
 
-1. **Install dependencies:**
-   ```bash
-   npm install
-   # or
-   yarn install
-   ```
+4. Open your browser and navigate to `http://localhost:5173`
 
-2. **Run the development server:**
-   ```bash
-   npm run dev
-   # or
-   yarn dev
-   ```
+### Available Scripts
 
-3. **Open [http://localhost:3000](http://localhost:3000) in your browser.**
+- `npm run dev` - Start development server
+- `npm run build` - Build for production
+- `npm run preview` - Preview production build
+- `npm run lint` - Run ESLint
 
----
+## Project Structure
 
-## 📝 Notes
-- All data is mock/dummy and stored locally.
-- No backend or authentication logic is implemented.
-- All UI flows and state changes are handled on the frontend.
+```
+src/
+├── components/     # Reusable UI components
+├── pages/         # Page components
+├── data/          # Static data and types
+├── App.tsx        # Main app component with routing
+└── main.tsx       # Application entry point
+```
 
----
+## Features
 
-## 📌 To Do
-- [ ] Implement all required pages and components
-- [ ] Add mock data for clubs, events, users
-- [ ] Ensure full responsiveness and accessibility
-- [ ] Polish UI/UX with soft animations and interactions
+- **Home Page** - Landing page with animated hero section
+- **Clubs Listing** - Browse all available clubs
+- **Club Details** - View individual club information
+- **User Authentication** - Login and signup functionality
+- **Dashboard** - Student and admin dashboards
+- **Responsive Design** - Mobile-friendly interface
+
+## Development
+
+This project uses:
+- **Vite** for fast development and building
+- **React Router** for client-side navigation
+- **Tailwind CSS** for utility-first styling
+- **TypeScript** for type safety
+
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Submit a pull request
+
+## License
+
+This project is licensed under the MIT License.
