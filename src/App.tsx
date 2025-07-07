@@ -11,7 +11,9 @@ import Dashboard from './pages/Dashboard';
 import AdminDashboard from './pages/AdminDashboard';
 import Confirmation from './pages/Confirmation';
 import Profile from './pages/Profile';
+import ProfileSetup from './pages/ProfileSetup';
 import { AuthProvider } from './contexts/AuthContext';
+import ProtectedRoute from './components/ProtectedRoute';
 
 // Main application component
 function App() {
@@ -22,16 +24,44 @@ function App() {
           <Navbar />
           <div className="pt-2 min-h-[80vh]">
             <Routes>
+              {/* Public routes */}
               <Route path="/" element={<Home />} />
               <Route path="/clubs" element={<Clubs />} />
               <Route path="/clubs/:id" element={<ClubDetail />} />
-              <Route path="/clubs/:id/apply" element={<ClubApply />} />
+              
+              {/* Authentication routes with simpler redirect logic */}
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<Signup />} />
-              <Route path="/dashboard" element={<Dashboard />} />
-              <Route path="/admin-dashboard" element={<AdminDashboard />} />
               <Route path="/confirmation" element={<Confirmation />} />
-              <Route path="/you" element={<Profile />} />
+              
+              {/* Profile setup (only for authenticated users with incomplete profiles) */}
+              <Route path="/profile-setup" element={
+                <ProtectedRoute requireAuth={true}>
+                  <ProfileSetup />
+                </ProtectedRoute>
+              } />
+              
+              {/* Protected routes (require authentication) */}
+              <Route path="/clubs/:id/apply" element={
+                <ProtectedRoute requireAuth={true} requireProfileComplete={true}>
+                  <ClubApply />
+                </ProtectedRoute>
+              } />
+              <Route path="/dashboard" element={
+                <ProtectedRoute requireAuth={true} requireProfileComplete={true}>
+                  <Dashboard />
+                </ProtectedRoute>
+              } />
+              <Route path="/admin-dashboard" element={
+                <ProtectedRoute requireAuth={true} requireAdmin={true} requireProfileComplete={true}>
+                  <AdminDashboard />
+                </ProtectedRoute>
+              } />
+              <Route path="/you" element={
+                <ProtectedRoute requireAuth={true} requireProfileComplete={true}>
+                  <Profile />
+                </ProtectedRoute>
+              } />
             </Routes>
           </div>
           <Footer />

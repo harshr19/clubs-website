@@ -1,6 +1,6 @@
 import { Link, useLocation } from "react-router-dom";
 import { useState } from "react";
-import Button from "./Button";
+// import Button from "./Button";
 import { motion } from "framer-motion";
 import { useAuth } from "../contexts/AuthContext";
 
@@ -12,15 +12,29 @@ const navLinks = [
 ];
 
 export default function Navbar() {
-  const { user, logout } = useAuth();
+  const { user, logout, loading } = useAuth();
   const location = useLocation();
   const pathname = location.pathname;
   const [searchQuery, setSearchQuery] = useState("");
+  const [isLoggingOut, setIsLoggingOut] = useState(false);
 
   // Handle user logout
-  const handleUserLogout = () => {
-    logout();
-    window.location.href = '/';
+  const handleUserLogout = async () => {
+    if (isLoggingOut) return; // Prevent multiple clicks
+    
+    if (window.confirm("Are you sure you want to log out?")) {
+      setIsLoggingOut(true);
+      try {
+        const { success } = await logout();
+        if (success) {
+          window.location.href = '/';
+        }
+      } catch (error) {
+        console.error("Logout error:", error);
+      } finally {
+        setIsLoggingOut(false);
+      }
+    }
   };
 
   return (
@@ -97,22 +111,39 @@ export default function Navbar() {
                 <Link to="/you" className="block px-3 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded">
                   My Profile
                 </Link>
+                <Link to="/dashboard" className="block px-3 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded">
+                  Dashboard
+                </Link>
                 <button
                   onClick={handleUserLogout}
                   className="block w-full text-left px-3 py-2 text-sm text-red-600 hover:bg-red-50 rounded"
+                  disabled={isLoggingOut}
                 >
-                  Logout
+                  {isLoggingOut ? "Logging out..." : "Logout"}
                 </button>
               </div>
             </div>
           </div>
         ) : (
-          <Link to="/login" className="ml-2 flex items-center justify-center w-10 h-10 rounded-full bg-gray-100 hover:bg-blue-100 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-200">
-            <svg width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-              <circle cx="12" cy="8" r="4" />
-              <path d="M4 20c0-2.21 3.58-4 8-4s8 1.79 8 4" />
-            </svg>
-          </Link>
+          <div className="relative group">
+            <button className="ml-2 flex items-center justify-center w-10 h-10 rounded-full bg-gray-100 hover:bg-blue-100 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-200 cursor-pointer">
+              <svg width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                <circle cx="12" cy="8" r="4" />
+                <path d="M4 20c0-2.21 3.58-4 8-4s8 1.79 8 4" />
+              </svg>
+            </button>
+            {/* Dropdown menu for non-authenticated users */}
+            <div className="absolute right-0 top-full mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+              <div className="p-1">
+                <Link to="/login" className="block px-3 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded">
+                  Login
+                </Link>
+                <Link to="/signup" className="block px-3 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded">
+                  Sign Up
+                </Link>
+              </div>
+            </div>
+          </div>
         )}
       </div>
     </motion.nav>

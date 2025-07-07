@@ -1,6 +1,6 @@
-import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { login } from "../mocks/auth";
+import { useState, useEffect } from "react";
+import { Link, useNavigate, Navigate } from "react-router-dom";
+// import { login } from "../mocks/auth"; // Commented out mock auth
 import { useAuth } from "../contexts/AuthContext";
 
 export default function LoginPage() {
@@ -12,7 +12,14 @@ export default function LoginPage() {
   const [loginError, setLoginError] = useState("");
   
   const navigate = useNavigate();
-  const { login: authLogin } = useAuth();
+  const { login: authLogin, user, loading } = useAuth();
+  
+  // Redirect if user is already authenticated
+  useEffect(() => {
+    if (!loading && user) {
+      navigate('/dashboard');
+    }
+  }, [user, loading, navigate]);
 
   const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -20,21 +27,18 @@ export default function LoginPage() {
     setIsSubmitting(true);
 
     try {
-      const userData = await login(emailInput, passwordInput);
-      if (userData) {
-        authLogin(userData);
-        // Navigate based on user type
-        if (userData.role === 'admin') {
-          navigate('/admin-dashboard');
-        } else {
-          navigate('/dashboard');
-        }
+      const { success, error } = await authLogin(emailInput, passwordInput);
+      
+      if (success) {
+        // Redirect will happen automatically based on the user role
+        // in the auth state change listener
+        navigate('/dashboard');
       } else {
-        setLoginError("Invalid credentials. Please check your email and password.");
+        setLoginError(error || "Invalid credentials. Please check your email and password.");
       }
-    } catch (err) {
+    } catch (err: any) {
       console.error('Login error:', err);
-      setLoginError("Something went wrong. Please try again later.");
+      setLoginError(err.message || "Something went wrong. Please try again later.");
     } finally {
       setIsSubmitting(false);
     }
