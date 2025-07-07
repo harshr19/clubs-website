@@ -72,14 +72,6 @@ This project uses:
 - **Vite** for fast development and building
 - **React Router** for client-side navigation
 - **Tailwind CSS** for utility-first styling
-- **TypeScript** for type safety
-
-## Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Submit a pull request
 
 ## License
 
